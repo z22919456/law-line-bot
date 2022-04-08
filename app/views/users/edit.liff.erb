@@ -1,0 +1,26 @@
+<h2>請設定您的員工資訊</h2>
+
+<%= form_for(current_user, url: user_edit_path, html: { method: :put }) do |f| %>
+  <%# <%= render "users/shared/error_messages", resource: resource %> %>
+
+  <div class="field">
+    <%= f.label "姓名" %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "業務代碼" %><br />
+    <%= f.text_field :org, autofocus: true, autocomplete: "name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "公司別" %><br />
+    <%= f.text_field :company, autofocus: true, autocomplete: "name" %>
+  </div>
+
+  <%= liff_path(path: "/user/edit", size: :full) %>
+
+  <div class="actions">
+    <%= f.submit "送出" %>
+  </div>
+<% end %>

@@ -1,0 +1,17 @@
+<%= raw(
+  Kamiflex.json(self) do
+    alt_text "Kamigo Demo 向您傳送了訊息"
+    bubble do
+      body do
+        text "讓我們歡迎新成員的加入～", wrap: true, weight: :bold
+
+        separator color: "#eeeeee"
+
+        horizontal_box backgroundColor: "#f2f2f2",cornerRadius: "20px" do
+          text "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",wrap:true,color:"#ff0000",flex: 2
+          text "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",wrap:true,color:"#0000ff",flex: 2
+        end
+      end
+    end
+  end
+)%>

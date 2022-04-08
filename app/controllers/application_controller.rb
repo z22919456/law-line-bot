@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def line_messaging_login
+    Rails.logger.debug '================LOGIN================'
     user = User.from_kamigo(params)
     sign_in user if user.present?
   end

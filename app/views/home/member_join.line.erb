@@ -1,0 +1,19 @@
+<%= raw(
+  Kamiflex.json(self) do
+    alt_text "Kamigo Demo 向您傳送了訊息"
+    bubble do
+      body do
+        text "讓我們歡迎新成員的加入～", wrap: true, weight: :bold
+
+        separator color: "#eeeeee"
+
+        horizontal_box @profiles, margin: :lg do |profile|
+          horizontal_box backgroundColor: "#00ccff", cornerRadius: "40px", width: "40px", height: "40px" do
+            image profile["pictureUrl"]
+          end
+          text profile["displayName"], margin: :lg, gravity: :center, wrap: true
+        end
+      end
+    end
+  end
+)%>
