@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_07_141324) do
+ActiveRecord::Schema.define(version: 2022_04_08_060134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "daily_reports", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "answered"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_daily_reports_on_user_id"
+  end
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_sales"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -23,13 +36,15 @@ ActiveRecord::Schema.define(version: 2022_04_07_141324) do
     t.string "eno"
     t.string "org"
     t.integer "manager_id"
-    t.boolean "company"
     t.boolean "is_sales"
     t.string "line_id"
     t.string "image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "organization_id"
+    t.string "real_name"
     t.index ["line_id"], name: "index_users_on_line_id", unique: true
+    t.index ["organization_id"], name: "index_users_on_organization_id"
   end
 
 end
