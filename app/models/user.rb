@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :validatable, :omniauthable, omniauth_providers: [:line]
 
   belongs_to :organization, optional: true
+  has_many :daily_reports
   before_save :set_default_righ_menu
 
   LOGIN_RICH_MENU = 'richmenu-cc832d0f455ccfc761be8c4c075f2185'.freeze
