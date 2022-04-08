@@ -53,7 +53,7 @@ class User < ApplicationRecord
   end
 
   def validate_eno
-    return unless eno_change?
+    return unless eno_changed?
 
     response = self.class.post('https://www1uat.law888.com.tw/LawAP/ws/referee', body: "eno=#{eno}",
                                                                                  headers: { 'Content-Type' => 'application/x-www-form-urlencoded' })
@@ -65,8 +65,9 @@ class User < ApplicationRecord
 
     result = JSON.parse(response.body)
     response_code = result['responseCode']
-    errors.add :base, result['responseMsg'] unless response_code == '00'
+    errors.add :basic, result['responseMsg'] unless response_code == '00'
   rescue StandardError
-    errors.add :base, '業代認證API發生錯誤'
+    Rails.logger.error StandardError
+    errors.add :basic, '業代認證API發生錯誤'
   end
 end

@@ -19,3 +19,5 @@ module LineBot
     # the framework and any gems in your application.
   end
 end
+
+Webpacker::Compiler.env['TAILWIND_MODE'] = 'build'

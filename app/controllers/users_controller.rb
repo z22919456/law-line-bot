@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
   include Kamigo::Clients::LineClient
 
-  def edit; end
+  def show; end
 
   def update
-    current_user.update(user_params)
-    render :edit, formats: :liff
+    if current_user.update(user_params)
+      render :show, formats: :liff
+    else
+      render :edit, formats: :liff
+    end
   end
 
   def index; end
