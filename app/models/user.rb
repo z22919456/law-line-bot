@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  extend Kamigo::Clients::LineClient
+  include HTTParty
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -6,6 +9,13 @@ class User < ApplicationRecord
 
   belongs_to :organization, optional: true
   before_save :set_default_righ_menu
+
+  LOGIN_RICH_MENU = 'richmenu-cc832d0f455ccfc761be8c4c075f2185'.freeze
+
+  validates :real_name, presence: { message: '請輸入姓名' }, on: :update
+  validates :eno, presence: { message: '請輸入業代' }, on: :update
+  validates :organization_id, presence: { message: '請選擇部門' }, on: :update
+  validate :validate_eno, on: :update
 
   def self.from_omniauth(auth)
     if auth.provider == 'line'
@@ -19,7 +29,7 @@ class User < ApplicationRecord
   # params[:profile][:displayName]
   def self.from_kamigo(params)
     if params[:profile].present? && params[:source_user_id].present?
-      line_id = params.dig(:source_user_id)
+      line_id = params[:source_user_id]
       name = params.dig(:profile, :displayName)
       image_url = params.dig(:profile, :pictureUrl)
       user = User.find_or_create_by(line_id: line_id)
@@ -39,13 +49,24 @@ class User < ApplicationRecord
   private
 
   def set_default_righ_menu
-    client = Line::Bot::Client.new do |config|
-      config.channel_secret = ENV['LINE_CHANNEL_SECRET']
-      config.channel_token = ENV['LINE_CHANNEL_TOKEN']
-    end
+    self.class.client.link_user_rich_menu(line_id, LOGIN_RICH_MENU) if real_name.nil? && organization.nil? && eno.nil?
+  end
 
-    if real_name.nil? && organization.nil? && eno.nil?
-      client.link_user_rich_menu(line_id, 'richmenu-cc832d0f455ccfc761be8c4c075f2185')
-    end
+  def validate_eno
+    return unless eno_change?
+
+    response = self.class.post('https://www1uat.law888.com.tw/LawAP/ws/referee', body: "eno=#{eno}",
+                                                                                 headers: { 'Content-Type' => 'application/x-www-form-urlencoded' })
+
+    Rails.logger.debug '%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
+    Rails.logger.debug "response.body: #{response.body}"
+    Rails.logger.debug errors.full_messages
+    Rails.logger.debug '%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
+
+    result = JSON.parse(response.body)
+    response_code = result['responseCode']
+    errors.add :base, result['responseMsg'] unless response_code == '00'
+  rescue StandardError
+    errors.add :base, '業代認證API發生錯誤'
   end
 end

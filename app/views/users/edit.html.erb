@@ -1,4 +1,4 @@
-<h2>Hi, <%=current_user&.name%> 請設定您的員工資訊</h2>
+<h2>Hi, <%=current_user&.name%> 請設定</h2>
 
 <%= form_for(current_user, url: user_edit_path, html: { method: :put, class: 'container', id: "edit_user" }) do |f| %>
   <%= render partial: "users/shared/error_message", locals:{ obj: f.object }%>

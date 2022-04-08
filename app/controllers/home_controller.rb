@@ -4,7 +4,6 @@ class HomeController < ApplicationController
   def index; end
 
   def member_join
-    byebug
     @profiles = params.dig(:payload, :joined, :members).map { |member| get_profile(member.dig(:userId)) }
   end
 
