@@ -68,3 +68,6 @@ gem 'kamigo', '~> 0.26.0'
 gem 'dotenv-rails', '~> 2.7'
 
 gem 'httparty'
+
+# react
+gem 'react-rails'
