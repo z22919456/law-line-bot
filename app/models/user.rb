@@ -47,6 +47,10 @@ class User < ApplicationRecord
     false
   end
 
+  def verify_user_data_setting
+    real_name.present? && eno.present? && organization.present?
+  end
+
   private
 
   def set_default_righ_menu

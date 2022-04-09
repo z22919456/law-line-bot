@@ -1,21 +1,24 @@
 label.text-md.mb-2.block 是否曾到過今日文件中個案的公共場所活動史？
 .grid.grid-rows-5.gap-4.pb-4
+  = f.hidden_field :p, value: '1', class: "hidden peer"
   div
-    = f.radio_button :answered, '1', class: "hidden peer"
-    = f.label :answered_1, "是, 需自我健康監測者", class: "block rounded-md shadow border border-gray-100 p-3 cursor-pointer text-gray-800 bg-white hover:bg-teal-600 hover:text-white peer-checked:bg-teal-700 peer-checked:text-white peer-checked:shadow-lg peer-checked:font-bold transition-all duration-200 transform"
+    = f.radio_button :answered, 'need_isolation', class: "hidden peer"
+      = f.label :answered_need_isolation, "是, 需自我健康監測者", class: "block rounded-md shadow border border-gray-100 p-3 cursor-pointer text-gray-800 bg-white hover:bg-teal-600 hover:text-white peer-checked:bg-teal-700 peer-checked:text-white peer-checked:shadow-lg peer-checked:font-bold transition-all duration-200 transform"
   div
-    = f.radio_button :answered, '2', class: "hidden peer"
-    = f.label :answered_2, "是, 被政府「通知」需自主健康管理者", class: "block rounded-md shadow border border-gray-100 p-3 cursor-pointer text-gray-800 bg-white hover:bg-teal-600 hover:text-white peer-checked:bg-teal-700 peer-checked:text-white peer-checked:shadow-lg peer-checked:font-bold transition-all duration-200 transform"
+    = f.radio_button :answered, 'touched_diagnosed', class: "hidden peer"
+    = f.label :answered_touched_diagnosed, "是, 被政府「通知」需自主健康管理者", class: "block rounded-md shadow border border-gray-100 p-3 cursor-pointer text-gray-800 bg-white hover:bg-teal-600 hover:text-white peer-checked:bg-teal-700 peer-checked:text-white peer-checked:shadow-lg peer-checked:font-bold transition-all duration-200 transform"
   div
-    = f.radio_button :answered, '3', class: "hidden peer"
-    = f.label :answered_3, "否", class: "block rounded-md shadow border border-gray-100 p-3 cursor-pointer text-gray-800 bg-white hover:bg-teal-600 hover:text-white peer-checked:bg-teal-700 peer-checked:text-white peer-checked:shadow-lg peer-checked:font-bold transition-all duration-200 transform"
+    = f.radio_button :answered, 'normal', class: "hidden peer"
+    = f.label :answered_normal, "否", class: "block rounded-md shadow border border-gray-100 p-3 cursor-pointer text-gray-800 bg-white hover:bg-teal-600 hover:text-white peer-checked:bg-teal-700 peer-checked:text-white peer-checked:shadow-lg peer-checked:font-bold transition-all duration-200 transform"
   div
-    = f.radio_button :answered, '4', class: "hidden peer"
-    = f.label :answered_4, "否, 但需自我健康監測者", class: "block rounded-md shadow border border-gray-100 p-3 cursor-pointer text-gray-800 bg-white hover:bg-teal-600 hover:text-white peer-checked:bg-teal-700 peer-checked:text-white peer-checked:shadow-lg peer-checked:font-bold transition-all duration-200 transform"
+    = f.radio_button :answered, 'need_report', class: "hidden peer"
+    = f.label :answered_need_report, "否, 但需自我健康監測者", class: "block rounded-md shadow border border-gray-100 p-3 cursor-pointer text-gray-800 bg-white hover:bg-teal-600 hover:text-white peer-checked:bg-teal-700 peer-checked:text-white peer-checked:shadow-lg peer-checked:font-bold transition-all duration-200 transform"
   div
-    = f.radio_button :answered, '5', class: "hidden peer"
-    = f.label :answered_5, "否, 但被「通知」需自主健康管理者", class: "block rounded-md shadow border border-gray-100 p-3 cursor-pointer text-gray-800 bg-white hover:bg-teal-600 hover:text-white peer-checked:bg-teal-700 peer-checked:text-white peer-checked:shadow-lg peer-checked:font-bold transition-all duration-200 transform"
-
+    = f.radio_button :answered, 'be_notified_need_report', class: "hidden peer"
+    = f.label :answered_be_notified_need_report, "否, 但被「通知」需自主健康管理者", class: "block rounded-md shadow border border-gray-100 p-3 cursor-pointer text-gray-800 bg-white hover:bg-teal-600 hover:text-white peer-checked:bg-teal-700 peer-checked:text-white peer-checked:shadow-lg peer-checked:font-bold transition-all duration-200 transform"
+  -if f.object.errors[:answered]
+    p.text-rose-700 
+      = f.object.errors[:answered].join('、')
 = f.submit "送出", class: "w-full py-3 my-2 text-md font-medium tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
 -if f.object.errors[:basic]
     p.text-rose-700 
