@@ -1,7 +1,7 @@
 class DailyReportsController < ApplicationController
   before_action :set_daily_report
   def new
-    return render edit(@daily_report) if @daily_report.present?
+    return render :edit if @daily_report.present?
 
     @daily_report = current_user.daily_reports.new
   end
@@ -15,6 +15,14 @@ class DailyReportsController < ApplicationController
   end
 
   def edit; end
+
+  def update
+    if @daily_report.update(daily_report_params)
+      render :index
+    else
+      render :update, formats: :liff
+    end
+  end
 
   private
 
