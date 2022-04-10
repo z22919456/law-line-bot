@@ -23,6 +23,19 @@
         -if f.object.errors[:organization_id]
           p.text-rose-700 
             = f.object.errors[:organization_id].join('、')
+      .mb-4
+        .grid.grid-cols-2.gap-4
+          div
+            = f.radio_button :role, 'sales', class: "hidden peer"
+            = f.label :role_sales, "我是業務員", class: "block rounded-md shadow border border-gray-100 p-3 cursor-pointer text-gray-800 bg-white hover:bg-teal-600 hover:text-white peer-checked:bg-teal-700 peer-checked:text-white peer-checked:shadow-lg peer-checked:font-bold transition-all duration-200 transform"
+          div
+            = f.radio_button :role, 'staff', class: "hidden peer"
+            = f.label :role_staff, "我是公司同仁", class: "block rounded-md shadow border border-gray-100 p-3 cursor-pointer text-gray-800 bg-white hover:bg-teal-600 hover:text-white peer-checked:bg-teal-700 peer-checked:text-white peer-checked:shadow-lg peer-checked:font-bold transition-all duration-200 transform"
+        -if f.object.errors[:role]
+          p.text-rose-700 
+            = f.object.errors[:role].join('、')
+  
+      / = liff_path(path: "/user/edit", size: :full)
       = f.submit "送出", class: "w-full py-3 my-2 text-md font-medium tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
       -if f.object.errors[:basic]
           p.text-rose-700 

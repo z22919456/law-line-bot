@@ -1,0 +1,80 @@
+<%= raw(
+  Kamiflex.json(self) do
+    alt_text "部門每日回報同整"
+    bubble size: "giga" do
+      # 單位名稱
+      header type: "box", layout: "vertical" do
+        text "台北營業處", weight: 'bold', size: 'xxl', align: "center"
+      end
+      body layout: "vertical", spacing: "2px" do
+        # 標題
+        horizontal_box spacing: "2px" do
+          horizontal_box backgroundColor: "#E37A33", paddingAll: "5px" do
+            text "項目", size: 'lg', align: "center", weight: 'bold'
+          end
+          horizontal_box backgroundColor: "#E37A33", paddingAll: "5px" do
+            text "人數", size: 'lg', align: "center", weight: 'bold'
+          end
+        end
+        # 專任業務
+        horizontal_box spacing: "2px" do
+          horizontal_box backgroundColor: "#F3C8A9", paddingAll: "5px" do
+            text "專任業務", size: 'lg', weight: 'bold'
+          end
+          horizontal_box backgroundColor: "#F9E4D6", paddingAll: "5px" do
+            text "51", size: 'lg', align: "center", weight: 'bold'
+          end
+        end
+
+        # 行政人員
+        horizontal_box spacing: "2px" do
+          horizontal_box backgroundColor: "#F3C8A9", paddingAll: "5px" do
+            text "行政人員", size: 'lg', weight: 'bold'
+          end
+          horizontal_box backgroundColor: "#F9E4D6", paddingAll: "5px" do
+            text "2", size: 'lg', align: "center", weight: 'bold'
+          end
+        end
+
+        # 今日回報狀況
+        horizontal_box spacing: "2px" do
+          horizontal_box backgroundColor: "#F4BB17", paddingAll: "5px" do
+            text "今日回報狀況", size: 'lg', weight: 'bold', align: "center"
+          end
+        end
+
+        # 足跡重疊
+        horizontal_box spacing: "2px" do
+          horizontal_box backgroundColor: "#F9E198", paddingAll: "5px" do
+            text "足跡重疊", size: 'lg', weight: 'bold'
+          end
+          horizontal_box backgroundColor: "#FCEFCC", paddingAll: "5px" do
+            text "2", size: 'lg', align: "center", weight: 'bold'
+          end
+        end
+
+        # 自我健康監測
+        horizontal_box spacing: "2px" do
+          horizontal_box backgroundColor: "#F9E198", paddingAll: "5px" do
+            text "自我健康監測", size: 'lg', weight: 'bold'
+          end
+          horizontal_box backgroundColor: "#FCEFCC", paddingAll: "5px" do
+            text "2", size: 'lg', align: "center", weight: 'bold'
+          end
+        end
+
+        # 自我健康管理
+        horizontal_box spacing: "2px" do
+          horizontal_box backgroundColor: "#F9E198", paddingAll: "5px" do
+            text "自我健康管理", size: 'lg', weight: 'bold'
+          end
+          horizontal_box backgroundColor: "#FCEFCC", paddingAll: "5px" do
+            text "2", size: 'lg', align: "center", weight: 'bold'
+          end
+        end
+      end
+    end
+  end
+)%>
+
+

@@ -1,6 +1,5 @@
 class User < ApplicationRecord
-  extend Kamigo::Clients::LineClient
-  include HTTParty
+  # include HTTParty
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -9,13 +8,18 @@ class User < ApplicationRecord
 
   belongs_to :organization, optional: true
   has_many :daily_reports
-  before_save :set_default_righ_menu
+  before_save :set_default_rich_menu
 
-  LOGIN_RICH_MENU = 'richmenu-cc832d0f455ccfc761be8c4c075f2185'.freeze
+  RICH_MENU = { default: ENV['DEFAULT_RICH_MENU'], staff: ENV['STAFF_RICH_MENU'], sales: ENV['SALES_RICH_MENU'], manager: ENV['MANAGER_RICH_MENU'],
+                sales_supervisor: ['SUPERVISOR_RICH_MENU'] }
+
+  # 業務 總公司職員 總公司部門經理 單位行政
+  enum role: { sales: 0, staff: 1, manager: 2, sales_supervisor: 3 }
 
   validates :real_name, presence: { message: '請輸入姓名' }, on: :update
   validates :eno, presence: { message: '請輸入業代' }, on: :update
   validates :organization_id, presence: { message: '請選擇部門' }, on: :update
+  validates :role, presence: { message: '請選擇一個選項' }, on: :update
   validate :validate_eno, on: :update
 
   def self.from_omniauth(auth)
@@ -53,15 +57,17 @@ class User < ApplicationRecord
 
   private
 
-  def set_default_righ_menu
-    self.class.client.link_user_rich_menu(line_id, LOGIN_RICH_MENU) if real_name.nil? && organization.nil? && eno.nil?
+  def set_default_rich_menu
+    return if user_id.nil?
+
+    self.class.client.link_user_rich_menu(line_id, RICH_MENU[role.to_sym || :default])
   end
 
   def validate_eno
     return unless eno_changed?
 
-    response = self.class.post('https://www1uat.law888.com.tw/LawAP/ws/referee', body: "eno=#{eno}",
-                                                                                 headers: { 'Content-Type' => 'application/x-www-form-urlencoded' })
+    response = HTTParty.post('https://www1uat.law888.com.tw/LawAP/ws/referee', body: "eno=#{eno}",
+                                                                               headers: { 'Content-Type' => 'application/x-www-form-urlencoded' })
 
     Rails.logger.debug '%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
     Rails.logger.debug "response.body: #{response.body}"
