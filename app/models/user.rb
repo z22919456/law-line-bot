@@ -58,16 +58,17 @@ class User < ApplicationRecord
   private
 
   def set_default_rich_menu
-    return if user_id.nil?
+    return if line_id.nil?
 
+    Rails.logger.debug '=='
     self.class.client.link_user_rich_menu(line_id, RICH_MENU[role.to_sym || :default])
   end
 
   def validate_eno
     return unless eno_changed?
 
-    response = HTTParty.post('https://www1uat.law888.com.tw/LawAP/ws/referee', body: "eno=#{eno}",
-                                                                               headers: { 'Content-Type' => 'application/x-www-form-urlencoded' })
+    response = HTTParty.post(ENV['ENO_API'], body: "eno=#{eno}",
+                                             headers: { 'Content-Type' => 'application/x-www-form-urlencoded' })
 
     Rails.logger.debug '%%%%%%%%%%%%%%%%%%%%%%%%%%%%'
     Rails.logger.debug "response.body: #{response.body}"
