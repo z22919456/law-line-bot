@@ -1,10 +1,8 @@
 class DailyReportsController < ApplicationController
   before_action :set_daily_report, only: %i[edit update new]
+  before_action :check_redirect, only: %i[new]
 
   def new
-    # 若今日已填寫 則可以修改
-    return render :edit if @daily_report.present?
-
     @daily_report = current_user.daily_reports.new
   end
 
@@ -53,11 +51,18 @@ class DailyReportsController < ApplicationController
 
   private
 
+  def check_redirect
+    path = edit_daily_reports_path if @daily_report.present?
+    path = new_org_daily_reports_path if current_user.sales_supervisor?
+
+    liff_redirect_to path, size: :full
+  end
+
   def daily_report_params
     params.require(:daily_report).permit(:answered, :user_id, :touch_date, :touch_location)
   end
 
   def set_daily_report
-    @daily_report = current_user.daily_reports.today
+    @daily_report = current_user.daily_reports.today.first
   end
 end

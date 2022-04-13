@@ -1,8 +1,10 @@
 class DailyReport < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
+  belongs_to :organization, optional: true
+
   default_scope { order(created_at: :desc) }
   # 今日表單
-  scope :today, -> { where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).first }
+  scope :today, -> { where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day) }
   # 在七天內有回報接觸者
   scope :last_touch_in_7_days, -> { where('touch_date > ?', Time.zone.now + 7.days).size > 1 }
 
