@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_12_173936) do
+ActiveRecord::Schema.define(version: 2022_04_13_145223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2022_04_12_173936) do
     t.string "touch_location"
     t.bigint "organization_id"
     t.integer "eno"
+    t.date "need_tracking_till"
     t.index ["organization_id"], name: "index_daily_reports_on_organization_id"
     t.index ["user_id"], name: "index_daily_reports_on_user_id"
   end
@@ -59,6 +60,27 @@ ActiveRecord::Schema.define(version: 2022_04_12_173936) do
     t.string "note"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "healthy_trackings", force: :cascade do |t|
+    t.float "body_temperature"
+    t.string "foot_step"
+    t.string "health_feels_today"
+    t.string "health_feels_weeks"
+    t.string "note"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_healthy_trackings_on_user_id"
+  end
+
+  create_table "org_summeries", force: :cascade do |t|
+    t.integer "need_reports"
+    t.integer "reported"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["organization_id"], name: "index_org_summeries_on_organization_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -84,4 +106,6 @@ ActiveRecord::Schema.define(version: 2022_04_12_173936) do
     t.index ["organization_id"], name: "index_users_on_organization_id"
   end
 
+  add_foreign_key "healthy_trackings", "users"
+  add_foreign_key "org_summeries", "organizations"
 end

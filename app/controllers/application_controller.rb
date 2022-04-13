@@ -8,13 +8,13 @@ class ApplicationController < ActionController::Base
     redirect_to user_line_omniauth_authorize_path
   end
 
-  def liff_redirect_to(path, options = {})
+  def redirect_to(path, options = {})
     if request.format.to_sym == :liff
       @path = path
       @options = options
       return render '/shareds/liff_redirect', formats: :liff
     end
-    redirect_to path
+    super path
   end
 
   def line_messaging_login

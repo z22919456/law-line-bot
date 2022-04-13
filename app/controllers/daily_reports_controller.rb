@@ -12,13 +12,15 @@ class DailyReportsController < ApplicationController
       # 若非填寫否 則需要補充其他資料
       return render :next_step unless @daily_report.completed?
 
-      render :index
+      render action: :index
     else
       render :new
     end
   end
 
-  def edit; end
+  def edit
+    redirect_to action: :new if @daily_report.nil?
+  end
 
   def next_step; end
 
@@ -41,21 +43,22 @@ class DailyReportsController < ApplicationController
     if @daily_report.update(daily_report_params)
       return render :next_step unless @daily_report.completed?
 
-      render :index
+      render action: :index
     else
       return render :next_step if params[:daily_report][:second]
 
-      render :edit, formats: :liff
+      render :edit
     end
   end
 
   private
 
   def check_redirect
-    path = edit_daily_reports_path if @daily_report.present?
-    path = new_org_daily_reports_path if current_user.sales_supervisor?
+    path = edit_user_daily_report_path if @daily_report.present?
+    path = new_user_org_daily_report_path if current_user.sales_supervisor?
+    return if path.nil?
 
-    liff_redirect_to path, size: :full
+    redirect_to path, size: :full
   end
 
   def daily_report_params

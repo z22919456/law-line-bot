@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   belongs_to :organization, optional: true
   has_many :daily_reports
+  has_many :healthy_trackings
 
   # 業務 總公司職員 總公司部門經理 單位行政
   enum role: { sales: 0, staff: 1, manager: 2, sales_supervisor: 3 }
@@ -47,8 +48,16 @@ class User < ApplicationRecord
     false
   end
 
-  def verify_user_data_setting
+  def registered
     real_name.present? && eno.present? && organization.present?
+  end
+
+  def report_completed
+    if sales_supervisor?
+      # TODO: 建立org的每日回報
+    else
+      daily_reports.completed?
+    end
   end
 
   private

@@ -1,10 +1,1 @@
-.container.mx-auto.p-3
-  h2.font-medium.text-xl.text-center.mt-3 Hi, #{current_user&.name} 
-  .shadow-lg.rounded.mt-3.border.border-gray-100.px-4.py-3.mx-auto.bg-white class="max-w-[500px]"
-    h1.font-medium.text-lg.mb-3.text-center #{Date.today.strftime("%m/%d")} 足跡疫情調查表
-    p.text-gray-700 請填寫以下資訊，以利後許追蹤。
-    p.text-gray-700 別擔心，會一切都會平安的。
-    hr.my-2
-    = form_for(@daily_report, url: daily_reports_path, html: { method: :put, id: "daily_report" }) do |f|
-      = render partial: "next_form", locals:{ f: f }
-    
+= render file: "daily_reports/next_step.html"

@@ -1,5 +1,5 @@
 class OrgDailyReportsController < ApplicationController
-  before_action :daily_report, only: :edit
+  before_action :set_daily_report, only: :edit
   def index
     @daily_reports = current_user.organization.daily_reports
   end
@@ -10,8 +10,6 @@ class OrgDailyReportsController < ApplicationController
 
   def create
     @daily_report = current_user.organization.daily_reports.create(daily_report_params)
-    Rails.logger.info @daily_report.errors.full_messages
-    Rails.logger.info '================================================================'
     if @daily_report.errors.empty?
       render :index
     else

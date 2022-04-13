@@ -2,16 +2,23 @@
 class CommandsController < ApplicationController
   include Kamigo::Clients::LineClient
 
-  def daily_report
+  # 目前部門回報狀況
+  def daily_report_summery
     return unless manager?
 
     @org = current_user.organization
   end
 
+  # 代辦事項
+  def todo_list
+    @registered = current_user.registered
+    @daily_report = current_user.report_completed
+    # @health_record =
+  end
+
   private
 
   def manager?
-    true
-    # current_user.is_manager
+    current_user.manager? || current_user.sales_supervisor?
   end
 end

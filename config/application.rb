@@ -11,6 +11,9 @@ module LineBot
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
+    config.time_zone = 'Taipei'
+    config.i18n.default_locale = :"zh-TW"
+
     # config.autoload_paths += Dir[Rails.root.join('app/models/history/')]
 
     # Settings in config/environments/* take precedence over those specified here.

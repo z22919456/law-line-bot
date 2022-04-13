@@ -1,10 +1,1 @@
-.container.mx-auto.p-3
-  h2.font-medium.text-xl.text-center.mt-3 Hi, #{current_user&.name} 
-  .shadow-lg.rounded.mt-3.border.border-gray-100.px-4.py-3.mx-auto.bg-white class="max-w-[500px]"
-    .flex.flex-col.items-center.justify-center.p-5.h-96
-      .rounded-full.border-8.w-40.h-40.flex.border-blue-500.text-blue-500.items-center.justify-center.text-7xl
-        i.fas.fa-check
-      p.font-medium.text-3xl.mt-6.leading-10.text-gray-800
-        | 感謝您的回覆
-        br
-        | 祝您身體健康
+= render file: "daily_reports/index.html"

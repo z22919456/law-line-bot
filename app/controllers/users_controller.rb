@@ -5,13 +5,13 @@ class UsersController < ApplicationController
 
   def update
     if current_user.update(user_params)
-      render :show, formats: :liff
+      render action: :show
     else
-      render :edit, formats: :liff
+      render :edit
     end
   end
 
-  def index; end
+  def edit; end
 
   private
 

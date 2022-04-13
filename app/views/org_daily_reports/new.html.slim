@@ -4,5 +4,5 @@
     h1.font-medium.text-lg.mb-3.text-center #{Date.today.strftime("%m/%d")} 足跡疫情調查表
     p.text-gray-700 請單位行政調查及通報是否有有同仁曾出沒過0407確診者足跡公共場所活動史，需自主健康管理者，若有請填寫下表。
     hr.my-2
-    = form_for(@daily_report, url: org_daily_reports_path, html: { method: :post, id: "daily_report" }) do |f|
+    = form_for(@daily_report, url: user_org_daily_reports_path, html: { method: :post, id: "daily_report" }) do |f|
       = render partial: "form", locals:{ f: f }
