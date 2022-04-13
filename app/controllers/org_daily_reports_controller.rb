@@ -1,7 +1,9 @@
 class OrgDailyReportsController < ApplicationController
-  before_action :set_daily_report, only: :edit
+  before_action :set_daily_report, only: %i[edit destroy update]
+  before_action :validates, only: %i[update create]
   def index
-    @daily_reports = current_user.organization.daily_reports
+    @org = current_user.organization
+    @daily_reports = @org.daily_reports
   end
 
   def new
@@ -9,9 +11,8 @@ class OrgDailyReportsController < ApplicationController
   end
 
   def create
-    @daily_report = current_user.organization.daily_reports.create(daily_report_params)
-    if @daily_report.errors.empty?
-      render :index
+    if @daily_report.errors.empty? && @daily_report.update(daily_report_params)
+      redirect_to action: :index
     else
       render :new
     end
@@ -20,21 +21,39 @@ class OrgDailyReportsController < ApplicationController
   def edit; end
 
   def update
-    @daily_report = current_user.daily_reports.create(daily_report_params)
+    @daily_report = @daily_report.update(daily_report_params)
     if @daily_report.errors.empty?
-      render :index
+      redirect_to action: :index
     else
       render :new
     end
   end
 
+  def destroy
+    if @daily_report.destroy
+      flash[:success] = '刪除成功'
+    else
+      flash[:alert] = '刪除失敗'
+    end
+    redirect_to action: :index
+  end
+
   private
 
+  def validates
+    @daily_report = current_user.organization.daily_reports.new unless @daily_report.present?
+    @daily_report.errors.add(:eno, '此為必填欄位') unless daily_report_params[:eno].present?
+    @daily_report.errors.add(:touch_date, '此為必填欄位') unless daily_report_params[:touch_date].present?
+    @daily_report.errors.add(:touch_location, '此為必填欄位') unless daily_report_params[:touch_location].present?
+    @daily_report.errors.add(:answered, '請選擇一個選項') unless daily_report_params[:answered].present?
+  end
+
   def daily_report_params
-    params.require(:daily_report).permit(:answered, :user_id, :touch_date, :touch_location, :eno)
+    params.require(:daily_report).permit(:answered, :touch_date, :touch_location, :eno)
   end
 
   def set_daily_report
-    @daily_report = DailyReport.find(params[:id])
+    @org = current_user.organization
+    @daily_report = @org.daily_reports.find(params[:id])
   end
 end

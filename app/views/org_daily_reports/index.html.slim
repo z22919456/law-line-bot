@@ -1,10 +1,26 @@
+// TODO: OrgSummery
 .container.mx-auto.p-3
-  h2.font-medium.text-xl.text-center.mt-3 Hi, #{current_user&.name} 
-  .shadow-lg.rounded.mt-3.border.border-gray-100.px-4.py-3.mx-auto.bg-white class="max-w-[500px]"
-    .flex.flex-col.items-center.justify-center.p-5.h-96
-      .rounded-full.border-8.w-40.h-40.flex.border-blue-500.text-blue-500.items-center.justify-center.text-7xl
-        i.fas.fa-check
-      p.font-medium.text-3xl.mt-6.leading-10.text-gray-800
-        | 感謝您的回覆
-        br
-        | 祝您身體健康
+  h2.font-medium.text-xl.text-center.my-3 
+    = @org.name
+    = " "
+    | 今日足跡回報
+
+  .shadow-md.container.rounded-lg
+    table.w-full.text-sm.text-left.text-gray-700
+      thead.text-xs.text-gray-800.bg-gray-200
+        tr
+          th.px-6.py-3 scope="col" 業務代碼
+          th.px-6.py-3 class="w-[150px]"
+            = link_to new_user_org_daily_report_path, class: "text-gray-500 hover:text-gray-800 pr-2" do
+              i.fas.fa-plus 
+              span.ml-1 新增一筆
+      tbody
+        - @daily_reports.each do |report|
+          tr.bg-white.border-b
+            th.px-6.py-4.font-medium
+              = report.eno
+            th.px-6.py-4.font-medium
+              = link_to edit_user_org_daily_report_path(report), class: "text-green-300 hover:text-green-500 pr-2" do
+                i.fas.fa-pen
+              = button_to user_org_daily_report_path(report), method: :delete, class: "text-red-300 hover:text-red-500 pl-2 inline-block", form_class: 'inline' do
+                i.fas.fa-trash

@@ -4,6 +4,6 @@
     h1.font-medium.text-lg.mb-3.text-center #{Date.today.strftime("%m/%d")} 足跡疫情調查表
     p.text-gray-700 今日已填寫，是否需要修改？
     hr.my-2
-    = form_for(@daily_report, url: user_daily_reports_path, html: { method: :put, id: "daily_report" }) do |f|
+    = form_for(@daily_report, url: user_org_daily_report_path(@daily_report), html: { method: :put, id: "daily_report" }) do |f|
       = render partial: "form", locals:{ f: f }
   
