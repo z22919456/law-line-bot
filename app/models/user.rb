@@ -8,10 +8,6 @@ class User < ApplicationRecord
 
   belongs_to :organization, optional: true
   has_many :daily_reports
-  before_save :set_default_rich_menu
-
-  RICH_MENU = { default: ENV['DEFAULT_RICH_MENU'], staff: ENV['STAFF_RICH_MENU'], sales: ENV['SALES_RICH_MENU'], manager: ENV['MANAGER_RICH_MENU'],
-                sales_supervisor: ['SUPERVISOR_RICH_MENU'] }
 
   # 業務 總公司職員 總公司部門經理 單位行政
   enum role: { sales: 0, staff: 1, manager: 2, sales_supervisor: 3 }
@@ -56,13 +52,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def set_default_rich_menu
-    return if line_id.nil?
-
-    Rails.logger.debug '=='
-    self.class.client.link_user_rich_menu(line_id, RICH_MENU[role.to_sym || :default])
-  end
 
   def validate_eno
     return unless eno_changed?
