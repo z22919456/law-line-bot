@@ -1,9 +1,10 @@
+
 label.text-md.mb-2.block 是否曾到過今日文件中個案的公共場所活動史？
 .grid.grid-rows-5.gap-4.pb-4
   = f.hidden_field :p, value: '1', class: "hidden peer"
   div
     = f.radio_button :answered, 'need_isolation', class: "hidden peer"
-      = f.label :answered_need_isolation, "是, 需自我健康監測者", class: "block rounded-md shadow border border-gray-100 p-3 cursor-pointer text-gray-800 bg-white hover:bg-teal-600 hover:text-white peer-checked:bg-teal-700 peer-checked:text-white peer-checked:shadow-lg peer-checked:font-bold transition-all duration-200 transform"
+    = f.label :answered_need_isolation, "是, 需自我健康監測者", class: "block rounded-md shadow border border-gray-100 p-3 cursor-pointer text-gray-800 bg-white hover:bg-teal-600 hover:text-white peer-checked:bg-teal-700 peer-checked:text-white peer-checked:shadow-lg peer-checked:font-bold transition-all duration-200 transform"
   div
     = f.radio_button :answered, 'touched_diagnosed', class: "hidden peer"
     = f.label :answered_touched_diagnosed, "是, 被政府「通知」需自主健康管理者", class: "block rounded-md shadow border border-gray-100 p-3 cursor-pointer text-gray-800 bg-white hover:bg-teal-600 hover:text-white peer-checked:bg-teal-700 peer-checked:text-white peer-checked:shadow-lg peer-checked:font-bold transition-all duration-200 transform"
