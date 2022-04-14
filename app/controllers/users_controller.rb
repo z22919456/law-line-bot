@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   include Kamigo::Clients::LineClient
+  before_action :authenticate_user
 
   def show; end
 

@@ -35,7 +35,7 @@
           var event = new CustomEvent('liff_submit', { 'detail': data });
           window.dispatchEvent(event);
         }
-        $('input[type="submit"]').click(function(e){
+        $('input.liff[type="submit"]').click(function(e){
           e.preventDefault();
           dispatch_liff_event(get_request_text($("form")));
         })

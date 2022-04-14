@@ -48,7 +48,7 @@ class User < ApplicationRecord
     false
   end
 
-  def registered
+  def registered?
     real_name.present? && eno.present? && organization.present?
   end
 

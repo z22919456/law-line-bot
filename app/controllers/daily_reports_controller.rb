@@ -1,4 +1,5 @@
 class DailyReportsController < ApplicationController
+  before_action :authenticate_user
   before_action :set_daily_report, only: %i[edit update new]
   before_action :check_redirect, only: %i[new]
 

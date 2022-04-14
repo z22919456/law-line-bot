@@ -1,9 +1,16 @@
 class OrgSummeriesController < ApplicationController
+  before_action :authenticate_user
   before_action :set_org_summery
-  before_action :check_redirect, only: %i[new]
+  before_action :check_role
+
+  def show
+    @daily_reports = @org.daily_reports
+  end
 
   def new
-    @org_summery = current_user.organization.org_summeries.new
+    redirect_to edit_user_org_summery_path if @org_summery.present?
+
+    @org_summery = @org.org_summeries.new
   end
 
   def edit
@@ -11,9 +18,9 @@ class OrgSummeriesController < ApplicationController
   end
 
   def create
-    @org_summery = current_user.organization.org_summeries.create(org_summery_params)
+    @org_summery = @org.org_summeries.create(org_summery_params)
     if @org_summery.errors.empty?
-      redirect_to user_org_daily_reports_path
+      redirect_to action: :show
     else
       render :new
     end
@@ -22,7 +29,7 @@ class OrgSummeriesController < ApplicationController
   def update
     @org_summery.update(org_summery_params)
     if @org_summery.errors.empty?
-      redirect_to user_org_daily_reports_path
+      redirect_to action: :show
     else
       render :edit
     end
@@ -30,11 +37,8 @@ class OrgSummeriesController < ApplicationController
 
   private
 
-  def check_redirect
-    path = edit_user_org_summery_path if @org_summery.present?
-    return if path.nil?
-
-    redirect_to path, size: :full
+  def check_role
+    redirect_to new_user_daily_report_path unless current_user.sales_supervisor?
   end
 
   def org_summery_params
@@ -42,6 +46,7 @@ class OrgSummeriesController < ApplicationController
   end
 
   def set_org_summery
-    @org_summery = current_user.organization.org_summeries.today.first
+    @org = current_user.organization
+    @org_summery = @org.org_summeries.today.first
   end
 end

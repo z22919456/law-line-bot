@@ -8,6 +8,14 @@ Rails.application.routes.draw do
   }
 
   get '目錄', to: 'home#menu'
+
+  # richmenu
+  get '/dispatch/daily', to: 'dispatch#daily', as: :richmenu_daily
+  get '/dispatch/registration', to: 'dispatch#user_registration', as: :richmenu_registration
+  get '/dispatch/healthy_tracking', to: 'dispatch#user_menu', as: :richmenu_healthy_tracking
+  get '/dispatch/menu', to: 'dispatch#user_menu', as: :richmenu_menu
+  get '/dispatch/footprint', to: 'dispatch#user_menu', as: :richmenu_footprint
+
   # resource :user
   # resources :daily_reports
   # resources :org_daily_reports

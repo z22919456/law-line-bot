@@ -11,7 +11,7 @@ class CommandsController < ApplicationController
 
   # 代辦事項
   def todo_list
-    @registered = current_user.registered
+    @registered = current_user.registered?
     @daily_report = current_user.report_completed
     # @health_record =
   end
