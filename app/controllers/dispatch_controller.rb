@@ -13,6 +13,10 @@ class DispatchController < ApplicationController
 
   def healthy_tracking
     return redirect_to edit_user_path unless current_user.registered?
+    return redirect_to not_need_user_healthy_tracking_path unless current_user.need_tracking?
+    return redirect_to edit_user_healthy_tracking_path if current_user.healthy_tracking.today.first
+
+    redirect_to edit_user_healthy_tracking_path
   end
 
   def footprints; end

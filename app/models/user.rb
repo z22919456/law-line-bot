@@ -60,6 +60,10 @@ class User < ApplicationRecord
     end
   end
 
+  def need_tracking?
+    daily_reports.where('need_tracking_till > ?', Date.today).present?
+  end
+
   private
 
   def validate_eno

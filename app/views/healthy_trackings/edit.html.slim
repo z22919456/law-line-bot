@@ -1,0 +1,7 @@
+.container.mx-auto.p-3
+  .shadow-lg.rounded.mt-3.border.border-gray-100.px-4.py-3.mx-auto.bg-white class="max-w-[500px]"
+    h1.font-medium.text-lg.mb-3.text-center 編輯 #{Date.today.strftime("%m/%d")} 自我健康管理
+    p.text-gray-700
+      = "Hi, #{current_user.name}，你今天過得好嗎？"
+    = form_for(@healthy_tracking, url: user_healthy_tracking_path, html: { method: :put, id: "org_summery" }) do |f|
+      = render partial: "form", locals:{ f: f }
