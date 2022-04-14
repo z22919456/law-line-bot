@@ -3,6 +3,7 @@ class OrgDailyReportsController < ApplicationController
   before_action :validates, only: %i[update create]
   def index
     @org = current_user.organization
+    @org_summery = @org.org_summeries.today.first
     @daily_reports = @org.daily_reports
   end
 

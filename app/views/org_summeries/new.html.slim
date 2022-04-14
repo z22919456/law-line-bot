@@ -1,0 +1,8 @@
+.container.mx-auto.p-3
+  h2.font-medium.text-xl.text-center.mt-3 Hi, #{current_user&.name} 
+  .shadow-lg.rounded.mt-3.border.border-gray-100.px-4.py-3.mx-auto.bg-white class="max-w-[500px]"
+    h1.font-medium.text-lg.mb-3.text-center #{Date.today.strftime("%m/%d")} 足跡疫情調查表
+    p.text-gray-700 請統計貴單位專任同仁是否曾出沒過 #{Date.today.strftime("%m/%d")} 確診者足跡公共場所活動史。
+    hr.my-2
+    = form_for(@org_summery, url: user_org_summery_path, html: { method: :post, id: "org_summery" }) do |f|
+      = render partial: "form", locals:{ f: f }

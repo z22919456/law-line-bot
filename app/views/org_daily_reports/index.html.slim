@@ -1,11 +1,25 @@
 // TODO: OrgSummery
-.container.mx-auto.p-3
+.container.mx-auto.p-3 class="max-w-[500px]"
   h2.font-medium.text-xl.text-center.my-3 
     = @org.name
     = " "
-    | 今日足跡回報
+    | 今日回報人數
 
-  .shadow-md.container.rounded-lg
+  .shadow-md.m-4.p-4.rounded-lg.bg-white
+    .grid.grid-cols-2.gap-4.mb-1
+      .text-center
+        p.text-gray-600 專任人數
+        p.m-3.font-bold.text-xl = @org_summery ? @org_summery.need_reports : "尚未填寫"
+      .text-center
+        p.text-gray-600 回報人數
+        p.m-3.font-bold.text-xl = @org_summery ? @org_summery.reported : "尚未填寫"
+    = link_to "#{@org_summery.present? ? "編輯" : "新增今日人數"}", new_user_org_summery_path, class: "block text-center w-full py-2 my-2 text-md font-medium tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+
+  h2.font-medium.text-xl.text-center.my-3 
+    = @org.name
+    = " "
+    | 需自主健康管理回報
+  .shadow-md.container.rounded-lg.overflow-hidden	
     table.w-full.text-sm.text-left.text-gray-700
       thead.text-xs.text-gray-800.bg-gray-200
         tr
@@ -15,6 +29,10 @@
               i.fas.fa-plus 
               span.ml-1 新增一筆
       tbody
+        - if @daily_reports.size.zero?
+          tr.bg-white.border-b
+            th.px-6.py-4.font-medium colspan="2"
+              p.text-gray-500.text-lg.text-center 今天無新增健康管理之同仁
         - @daily_reports.each do |report|
           tr.bg-white.border-b
             th.px-6.py-4.font-medium

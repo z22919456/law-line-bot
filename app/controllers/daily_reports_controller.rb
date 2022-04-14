@@ -43,7 +43,7 @@ class DailyReportsController < ApplicationController
     if @daily_report.update(daily_report_params)
       return render :next_step unless @daily_report.completed?
 
-      render action: :index
+      redirect_to action: :index
     else
       return render :next_step if params[:daily_report][:second]
 
