@@ -24,6 +24,12 @@ class User < ApplicationRecord
   validates :role, presence: { message: '請選擇一個選項' }, on: :update
   validate :validate_eno, on: :update
 
+  before_commit :check_daily_report_eno
+
+  def check_daily_report_eno
+    organization.daily_reports.where(eno: eno).update_all(user_id: id)
+  end
+
   def self.from_omniauth(auth)
     if auth.provider == 'line'
       user = User.find_or_create_by(line_id: auth.uid)
@@ -43,6 +49,15 @@ class User < ApplicationRecord
       user.update(name: name, image_url: image_url)
       user
     end
+  end
+
+  def role_name
+    {
+      sales: '業務員',
+      staff: '公司同仁',
+      manager: '負責主管',
+      sales_supervisor: '單位行政'
+    }[role&.to_sym]
   end
 
   def email_required?

@@ -1,8 +1,8 @@
 .container.mx-auto.p-3
   h2.font-medium.text-xl.text-center.mt-3 Hi, #{current_user&.name} 
   .shadow-lg.rounded.mt-3.border.border-gray-100.px-4.py-3.mx-auto.bg-white class="max-w-[500px]"
-    h1.font-medium.text-lg.mb-3.text-center #{Date.today.strftime("%m/%d")} 足跡疫情調查表
-    p.text-gray-700 今日已填寫，是否需要修改？
+    h1.font-medium.text-lg.mb-3.text-center 編輯 #{Date.today.strftime("%m/%d")} 個人足跡調查
+    p.text-gray-700 請先閱讀今日防疫小組於「中聯疾管家」所發佈的全國確診者足跡列表。並回答以下問題
     hr.my-2
     = form_for(@daily_report, url: user_daily_report_path, html: { method: :put, id: "daily_report" }) do |f|
       = render partial: "form", locals:{ f: f }

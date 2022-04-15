@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get '目錄', to: 'home#menu'
   get '我該做什麼？', to: 'commands#menu'
+  get '目前部門回報狀況', to: 'commands#daily_report_summery'
 
   # richmenu
   get '/dispatch/daily', to: 'dispatch#daily', as: :richmenu_daily
@@ -32,6 +33,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get '目前部門回報狀況', to: 'commands#daily_report_summery'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

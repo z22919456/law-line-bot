@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_13_145223) do
+ActiveRecord::Schema.define(version: 2022_04_15_155825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 2022_04_13_145223) do
     t.date "touch_date"
     t.string "touch_location"
     t.bigint "organization_id"
-    t.integer "eno"
+    t.string "eno"
     t.date "need_tracking_till"
     t.index ["organization_id"], name: "index_daily_reports_on_organization_id"
     t.index ["user_id"], name: "index_daily_reports_on_user_id"

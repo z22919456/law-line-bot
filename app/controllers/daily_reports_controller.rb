@@ -67,6 +67,6 @@ class DailyReportsController < ApplicationController
   end
 
   def set_daily_report
-    @daily_report = current_user.today_daily_reports.first
+    @daily_report = current_user.today_daily_report
   end
 end
