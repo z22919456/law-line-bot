@@ -5,6 +5,7 @@ class OrgSummeriesController < ApplicationController
 
   def show
     @daily_reports = @org.daily_reports
+    render :show
   end
 
   def new
@@ -47,6 +48,6 @@ class OrgSummeriesController < ApplicationController
 
   def set_org_summery
     @org = current_user.organization
-    @org_summery = @org.org_summeries.today.first
+    @org_summery = @org.today_org_summery
   end
 end
