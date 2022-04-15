@@ -38,32 +38,31 @@ label.text-md.mb-2.block 是否曾到過今日文件中個案的公共場所活�
     p.text-rose-700 
       = f.object.errors[:basic].join('、')
 
+
 javascript:
-  window.onload = function() {
-    var nextFrom = document.querySelector('#next_form')
-    var answeredInputs = document.querySelectorAll('input[name="daily_report[answered]"]')
-    var normalInput = document.querySelector('#daily_report_answered_normal')
-    var ans = document.querySelector('input[name="daily_report[answered]"]:checked')?.value
+  var nextFrom = document.querySelector('#next_form')
+  var answeredInputs = document.querySelectorAll('input[name="daily_report[answered]"]')
+  var normalInput = document.querySelector('#daily_report_answered_normal')
+  var ans = document.querySelector('input[name="daily_report[answered]"]:checked')?.value
 
-    var nextFromInput = document.querySelectorAll("#next_form input")
+  var nextFromInput = document.querySelectorAll("#next_form input")
 
-    if (ans !== null && ans !== "normal") {
+  if (ans !== null && ans !== "normal") {
+    nextFrom.style = "display: block;"
+  }
+  
+  function handleNextForm (e) {
+    if(normalInput.checked) {
+      nextFrom.style = "display: none;"
+      nextFromInput.forEach(function (input) {
+        input.value = null
+      })
+    } else {
       nextFrom.style = "display: block;"
     }
-    
-    function handleNextForm (e) {
-      if(normalInput.checked) {
-        nextFrom.style = "display: none;"
-        nextFromInput.forEach(function (input) {
-          input.value = null
-        })
-      } else {
-        nextFrom.style = "display: block;"
-      }
-    }
-
-    answeredInputs.forEach(function (input) {
-      input.addEventListener("change", handleNextForm)
-    })
   }
+
+  answeredInputs.forEach(function (input) {
+    input.addEventListener("change", handleNextForm)
+  })
   
