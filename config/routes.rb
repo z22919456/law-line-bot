@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   }
 
   get '目錄', to: 'home#menu'
+  get '我該做什麼？', to: 'commands#menu'
 
   # richmenu
   get '/dispatch/daily', to: 'dispatch#daily', as: :richmenu_daily
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
   # resources :org_summeries
 
   resource :user, only: %i[show edit update] do
+    get :login
     resource :daily_report
     resources :org_daily_reports
     resource :org_summery

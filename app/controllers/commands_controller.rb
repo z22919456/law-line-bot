@@ -16,6 +16,13 @@ class CommandsController < ApplicationController
     # @health_record =
   end
 
+  def menu
+    @registered = current_user.registered?
+    @reported = current_user.daily_report.present?
+    @need_tracking = current_user.need_tracking?
+    @tracked = current_user.healthy_tracking.present?
+  end
+
   private
 
   def manager?

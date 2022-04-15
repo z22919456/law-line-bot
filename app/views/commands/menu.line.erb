@@ -1,0 +1,35 @@
+<%= raw(
+  Kamiflex.json(self) do
+    alt_text "功能"
+    bubble do
+      body layout: "vertical", spacing: "md" do
+        text "今日防疫代辦事項", weight: :bold, align: :start
+        
+        separator color: "#eeeeee"
+
+        horizontal_box  spacing: :md do
+          text "公司同仁認證", align: :start
+          text @registered ? "✅" : "❌", align: :end
+        end
+
+        horizontal_box spacing: :md do
+          text "每日足跡回報", align: :start
+          text @reported ? "✅" : "❌", align: :end
+        end
+
+        horizontal_box spacing: :md do
+          text "自我健康監控", align: :start
+          text @need_tracking ? (@tracked ? "✅" : "❌") : "不需要" , align: :end
+        end
+      end
+
+      footer layout: :vertical, spacing: :md do
+        horizontal_box spacing: :md do
+          url_button "每日足跡回報", "https://www.kamigo.tw/", style: "primary"
+          url_button "全國確診者足跡", "https://www.kamigo.tw/", style: "primary"
+        end
+        url_button "公司同仁認證", "https://www.kamigo.tw/"
+      end
+    end
+  end
+)%>

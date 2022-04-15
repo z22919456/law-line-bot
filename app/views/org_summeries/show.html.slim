@@ -31,8 +31,8 @@
       tbody
         - if @daily_reports.size.zero?
           tr.bg-white.border-b
-            th.px-6.py-4.font-medium colspan="2"
-              p.text-gray-500.text-lg.text-center 今天無新增健康管理之同仁
+            th.px-6.py-4.font-medium colspan="3"
+              p.text-gray-500.text-lg.text-center 今天尚未新增健康管理之同仁
         - @daily_reports.each do |report|
           tr.bg-white.border-b
             th.px-6.py-4.font-medium
