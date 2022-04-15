@@ -1,6 +1,7 @@
 = button_to "",user_line_omniauth_authorize_path, id: "login"
 
 javascript:
-  window.onload = () => {
-    document.getElementById("login").click()
-  }
+  document.addEventListener("DOMContentLoaded", function() {
+    
+    document.querySelector("form").submit();
+  });

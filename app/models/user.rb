@@ -27,13 +27,14 @@ class User < ApplicationRecord
   before_commit :check_daily_report_eno
 
   def check_daily_report_eno
-    organization.daily_reports.where(eno: eno).update_all(user_id: id)
+    organization && organization.daily_reports.where(eno: eno).update_all(user_id: id)
   end
 
   def self.from_omniauth(auth)
     if auth.provider == 'line'
       user = User.find_or_create_by(line_id: auth.uid)
-      user.update(name: auth.info.name)
+      user.name = auth.info.name
+      user.save(validate: false)
       user
     end
   end
@@ -46,7 +47,9 @@ class User < ApplicationRecord
       name = params.dig(:profile, :displayName)
       image_url = params.dig(:profile, :pictureUrl)
       user = User.find_or_create_by(line_id: line_id)
-      user.update(name: name, image_url: image_url)
+      user.name = name
+      user.image_url = image_url
+      user.save(validate: false)
       user
     end
   end
