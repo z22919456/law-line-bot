@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     return if current_user.present?
 
-    redirect_to user_line_omniauth_authorize_path, method: :post
+    redirect_to login_user_path
   end
 
   def redirect_to(path, options = {})
