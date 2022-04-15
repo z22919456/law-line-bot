@@ -33,7 +33,7 @@ class HealthyTrackingsController < ApplicationController
   private
 
   def set_healthy_tracking
-    @healthy_tracking = current_user.healthy_trackings.today.first
+    @healthy_tracking = current_user.today_healthy_tracking
   end
 
   def healthy_tracking_params

@@ -8,7 +8,12 @@ class User < ApplicationRecord
 
   belongs_to :organization, optional: true
   has_many :daily_reports
+  has_one :today_daily_report, -> { where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day) },
+          class_name: 'DailyReport'
   has_many :healthy_trackings
+  has_one :today_healthy_tracking, -> { where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day) },
+          class_name: 'HealthyTracking'
+  has_many :org_daily_reports, class_name: 'DailyReports', through: :organization
 
   # 業務 總公司職員 總公司部門經理 單位行政
   enum role: { sales: 0, staff: 1, manager: 2, sales_supervisor: 3 }

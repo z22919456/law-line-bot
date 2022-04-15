@@ -14,6 +14,10 @@ class UsersController < ApplicationController
 
   def edit; end
 
+  def login
+    render :login
+  end
+
   private
 
   def user_params
