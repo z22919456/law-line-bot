@@ -72,14 +72,6 @@ class User < ApplicationRecord
     real_name.present? && eno.present? && organization.present?
   end
 
-  def report_completed
-    if sales_supervisor?
-      # TODO: 建立org的每日回報
-    else
-      daily_reports.completed?
-    end
-  end
-
   def need_tracking?
     daily_reports.where('need_tracking_till > ?', Date.today).present?
   end

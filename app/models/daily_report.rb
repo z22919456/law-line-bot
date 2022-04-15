@@ -8,15 +8,8 @@ class DailyReport < ApplicationRecord
   enum answered: { need_isolation: '1', touched_diagnosed: '2', normal: '3', need_report: '4',
                    be_notified_need_report: '5' }
   validates :answered, presence: { message: '請選擇一個選項' }
-
-  # 是否已完成本次紀錄
-  def completed?
-    return true if normal?
-
-    return true if touch_date.present? && touch_location.present?
-
-    false
-  end
+  validates :touch_date, presence: { message: '請選擇時間' }, if: ->(v) { v.answered && !v.normal? }
+  validates :touch_location, presence: { message: '請陳述原因或地點' }, if: ->(v) { v.answered && !v.normal? }
 
   def set_tracking_date
     return if need_tracking_till.present? || touch_date.nil?
