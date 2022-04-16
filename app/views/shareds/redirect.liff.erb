@@ -1,7 +1,7 @@
 <script>
   if (window.liff) {
     window.addEventListener("liff_ready", function() {
-      location.replace("<%=liff_path(path: @path, size: @options[:size] )%>");
+      location.replace("<%= @path%>");
     });
   } else {
     location.replace("<%=@path%>")
