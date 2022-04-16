@@ -50,6 +50,7 @@
 
       if current_user.registered?
         footer layout: :vertical, spacing: :md, borderWidth: "light", backgroundColor: "#1F2024" do
+          url_button "自我健康監控", "https://www.kamigo.tw/", style: "primary", color: "#E97346" if  @need_tracking
           url_button "每日足跡回報", liff_path(path: richmenu_daily_path, liff_size: :full), style: "primary", color: "#177F7C"
           url_button "查看確診者足跡", "https://www.kamigo.tw/", style: "primary", color: "#8BADDB"
           url_button "編輯個人資料", liff_path(path: richmenu_registration_path, liff_size: :tall)
