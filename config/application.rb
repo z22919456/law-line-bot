@@ -12,6 +12,7 @@ module LineBot
     config.load_defaults 6.0
 
     config.time_zone = 'Taipei'
+    config.i18n.available_locales = [:"zh-TW"]
     config.i18n.default_locale = :"zh-TW"
 
     # config.autoload_paths += Dir[Rails.root.join('app/models/history/')]
