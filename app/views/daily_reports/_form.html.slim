@@ -46,8 +46,8 @@ javascript:
   var ans = document.querySelector('input[name="daily_report[answered]"]:checked')?.value
 
   var nextFromInput = document.querySelectorAll("#next_form input")
-
-  if (ans !== null && ans !== "normal") {
+  console.log(ans)
+  if (ans && ans !== "normal") {
     nextFrom.style = "display: block;"
   }
   

@@ -5,7 +5,7 @@
       .mb-4
         = f.label "業代", class: "text-gray-700", for: "eno"
         br
-        = f.text_field :eno, autofocus: true, autocomplete: "id", id: "eno", class: "block w-full px-4 py-2 mt-1 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring"
+        = f.text_field :eno, autofocus: true, autocomplete: "id", id: "eno", class: "block w-full px-4 py-2 mt-1 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring", onkeyup: "javascript:this.value=this.value.toUpperCase();"
         -if f.object.errors[:eno]
           p.text-rose-700 
             = f.object.errors[:eno].join('、')
