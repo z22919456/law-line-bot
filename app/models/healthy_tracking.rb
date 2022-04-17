@@ -1,5 +1,6 @@
 class HealthyTracking < ApplicationRecord
   belongs_to :user
+  has_one :organization, through: :user
   scope :today, -> { where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day) }
 
   validates :body_temperature, presence: { message: '記得量體溫喔' }

@@ -1,26 +1,56 @@
 Trestle.resource(:users) do
   menu do
-    item :users, icon: "fa fa-star"
+    item :users, icon: 'fa fa-user'
   end
+
+  scope :sales, -> { User.sales }
+  scope :staff, -> { User.staff }
+  scope :manager, -> { User.manager }
+  scope :sales_supervisor, -> { User.sales_supervisor }
 
   # Customize the table columns shown on the index view.
   #
-  # table do
-  #   column :name
-  #   column :created_at, align: :center
-  #   actions
-  # end
+  table do
+    column :image_url do |user|
+      image_tag(user.image_url, style: 'height: 50px') if user.image_url
+    end
+    column :name
+    column :real_name
+    column :eno
+    column :organization
+    column :role
+    column :need_track do |user|
+      user.need_tracking? ? '是' : '否'
+    end
+    column :created_at, align: :center
+    actions
+  end
 
   # Customize the form fields shown on the new/edit views.
   #
-  # form do |user|
-  #   text_field :name
-  #
-  #   row do
-  #     col { datetime_field :updated_at }
-  #     col { datetime_field :created_at }
-  #   end
-  # end
+  form do |user|
+    tab :user do
+      text_field :name
+      select :organization_id, Organization.all, { label: 'organization' }
+      select :role, User.roles.keys, { label: 'role' }
+      row do
+        col { datetime_field :updated_at }
+        col { datetime_field :created_at }
+      end
+    end
+
+    tab :daily_report, badge: user.daily_reports.count do
+      table DailyReportsAdmin.table, collection: user.daily_reports
+    end
+
+    tab :healthy_tracking, badge: user.healthy_trackings.count do
+    end
+
+    if user.sales_supervisor?
+      tab :org_daily_reports, badge: user.daily_reports.count do
+      end
+    end
+  end
 
   # By default, all parameters passed to the update and create actions will be
   # permitted. If you do not have full trust in your users, you should explicitly
