@@ -20,6 +20,8 @@ module LineBot
     # config.i18n.default_locale = :"zh-TW"
     config.i18n.locale = :"zh-TW"
 
+    config.assets.initialize_on_precompile = false
+
     # config.autoload_paths += Dir[Rails.root.join('app/models/history/')]
 
     # Settings in config/environments/* take precedence over those specified here.
