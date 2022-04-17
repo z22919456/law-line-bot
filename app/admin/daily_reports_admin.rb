@@ -1,6 +1,6 @@
 Trestle.resource(:daily_reports) do
   menu do
-    item :daily_reports, icon: 'fa fa-star'
+    item :daily_reports, icon: 'fas fa-list-alt'
   end
 
   # scope :today, -> { DailyReport.where(created_at: Date.today.beginning_of_day..Date.today.end_of_day) }
@@ -15,8 +15,19 @@ Trestle.resource(:daily_reports) do
   # Customize the table columns shown on the index view.
   #
   table do
-    column :user
-    column :answered
+    column :user do |daily_report|
+      link_to daily_report.user.real_name, edit_users_admin_path(daily_report.user) if daily_report.user.present?
+    end
+    column :organization do |daily_report|
+      if daily_report.organization
+        link_to daily_report.organization.name,
+                edit_organizations_admin_path(daily_report.organization)
+      end
+      if daily_report.user
+        link_to daily_report.user.organization.name,
+                edit_organizations_admin_path(daily_report.user.organization)
+      end
+    end
     column :touch_date
     column :touch_location
     column :write do |daily_report|

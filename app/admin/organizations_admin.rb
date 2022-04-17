@@ -1,6 +1,6 @@
 Trestle.resource(:organizations) do
   menu do
-    item :organizations, icon: 'fa fa-star'
+    item :organizations, icon: 'fas fa-building'
   end
 
   # Customize the table columns shown on the index view.

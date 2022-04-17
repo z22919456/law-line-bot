@@ -1,6 +1,6 @@
 Trestle.resource(:healthy_trackings) do
   menu do
-    item :healthy_trackings, icon: 'fa fa-star'
+    item :healthy_trackings, icon: 'fas fa-virus'
   end
 
   Organization.where(id: HealthyTracking.joins(:user).pluck(:organization_id)).each do |organization|
