@@ -3,6 +3,11 @@ Trestle.resource(:organizations) do
     item :organizations, icon: 'fas fa-building'
   end
 
+  search do |query|
+    Organization.all if query.nil?
+    Organization.where('name ILIKE ?', "%#{query}%") if query.present?
+  end
+
   # Customize the table columns shown on the index view.
   #
   table do

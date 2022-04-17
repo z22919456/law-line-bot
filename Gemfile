@@ -76,4 +76,7 @@ gem 'slim'
 
 gem 'tailwindcss-rails', '~> 2.0'
 
+# admin
 gem 'trestle'
+gem 'trestle-auth'
+gem 'trestle-search'

@@ -3,6 +3,14 @@ Trestle.resource(:users) do
     item :users, icon: 'fa fa-user'
   end
 
+  search do |query|
+    User.all if query.nil?
+    if query.present?
+      User.where('name ILIKE ? OR real_name ILIKE ? OR eno LIKE ?', "%#{query}%", "%#{query}%",
+                 "%#{query.upcase}%")
+    end
+  end
+
   scope :sales, -> { User.sales }
   scope :staff, -> { User.staff }
   scope :manager, -> { User.manager }
