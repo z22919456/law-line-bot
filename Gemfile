@@ -75,3 +75,5 @@ gem 'react-rails'
 gem 'slim'
 
 gem 'tailwindcss-rails', '~> 2.0'
+
+gem 'trestle'
