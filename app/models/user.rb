@@ -79,6 +79,15 @@ class User < ApplicationRecord
     daily_reports.where('need_tracking_till > ?', Date.today).present?
   end
 
+  def send_daily_report_notify
+    return if today_daily_report.present?
+
+    self.class.client.push_message(line_id, {
+                                     type: 'text',
+                                     text: "Hi,#{name}. \n提醒您，今日尚未填寫每日足跡回報喔!!"
+                                   })
+  end
+
   private
 
   def validate_eno
