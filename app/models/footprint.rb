@@ -1,7 +1,9 @@
 class Footprint < ApplicationRecord
-  before_create :send_line_notification
+  before_commit :send_line_notification
 
   def send_line_notification
+    return unless created_at.today?
+
     self.class.client.broadcast(create_flex_message_json)
   end
 
