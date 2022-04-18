@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>hi</title>
+    <title>請稍候...</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1" >
@@ -9,7 +9,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%# <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
     <script src="https://kit.fontawesome.com/04a34cccc6.js" crossorigin="anonymous"></script>
@@ -35,7 +35,7 @@
           var event = new CustomEvent('liff_submit', { 'detail': data });
           window.dispatchEvent(event);
         }
-        $('input[type="submit"]').click(function(e){
+        $('input.liff[type="submit"]').click(function(e){
           e.preventDefault();
           dispatch_liff_event(get_request_text($("form")));
         })

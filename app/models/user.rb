@@ -8,10 +8,12 @@ class User < ApplicationRecord
 
   belongs_to :organization, optional: true
   has_many :daily_reports
-  before_save :set_default_rich_menu
-
-  RICH_MENU = { default: ENV['DEFAULT_RICH_MENU'], staff: ENV['STAFF_RICH_MENU'], sales: ENV['SALES_RICH_MENU'], manager: ENV['MANAGER_RICH_MENU'],
-                sales_supervisor: ['SUPERVISOR_RICH_MENU'] }
+  has_one :today_daily_report, -> { where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day) },
+          class_name: 'DailyReport'
+  has_many :healthy_trackings
+  has_one :today_healthy_tracking, -> { where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day) },
+          class_name: 'HealthyTracking'
+  has_many :org_daily_reports, class_name: 'DailyReports', through: :organization
 
   # 業務 總公司職員 總公司部門經理 單位行政
   enum role: { sales: 0, staff: 1, manager: 2, sales_supervisor: 3 }
@@ -22,10 +24,17 @@ class User < ApplicationRecord
   validates :role, presence: { message: '請選擇一個選項' }, on: :update
   validate :validate_eno, on: :update
 
+  before_commit :check_daily_report_eno
+
+  def check_daily_report_eno
+    organization && organization.daily_reports.where(eno: eno).update_all(user_id: id)
+  end
+
   def self.from_omniauth(auth)
     if auth.provider == 'line'
       user = User.find_or_create_by(line_id: auth.uid)
-      user.update(name: auth.info.name)
+      user.name = auth.info.name
+      user.save(validate: false)
       user
     end
   end
@@ -38,9 +47,20 @@ class User < ApplicationRecord
       name = params.dig(:profile, :displayName)
       image_url = params.dig(:profile, :pictureUrl)
       user = User.find_or_create_by(line_id: line_id)
-      user.update(name: name, image_url: image_url)
+      user.name = name
+      user.image_url = image_url
+      user.save(validate: false)
       user
     end
+  end
+
+  def role_name
+    {
+      sales: '業務員',
+      staff: '公司同仁',
+      manager: '負責主管',
+      sales_supervisor: '單位行政'
+    }[role&.to_sym]
   end
 
   def email_required?
@@ -51,18 +71,15 @@ class User < ApplicationRecord
     false
   end
 
-  def verify_user_data_setting
+  def registered?
     real_name.present? && eno.present? && organization.present?
   end
 
-  private
-
-  def set_default_rich_menu
-    return if line_id.nil?
-
-    Rails.logger.debug '=='
-    self.class.client.link_user_rich_menu(line_id, RICH_MENU[role.to_sym || :default])
+  def need_tracking?
+    daily_reports.where('need_tracking_till > ?', Date.today).present?
   end
+
+  private
 
   def validate_eno
     return unless eno_changed?

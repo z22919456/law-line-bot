@@ -5,7 +5,19 @@ class ApplicationController < ActionController::Base
   def authenticate_user
     return if current_user.present?
 
-    redirect_to user_line_omniauth_authorize_path
+    redirect_to login_user_path
+  end
+
+  def redirect_to(path, options = {})
+    if request.format.to_sym == :liff
+      @path = path
+      @options = options
+      return render '/shareds/redirect', formats: :liff
+    end
+    options.except!(:size)
+    puts '================================'
+    puts options
+    super path, options
   end
 
   def line_messaging_login

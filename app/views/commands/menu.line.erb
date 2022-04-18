@@ -1,0 +1,61 @@
+<%= raw(
+   Kamiflex.json(self) do
+    alt_text "功能"
+    bubble do
+      body layout: "vertical", spacing: "md", borderWidth: "light", backgroundColor: "#1F2024" do
+        horizontal_box spacing: :lg, paddingBottom: "20px"  do
+          horizontal_box backgroundColor: "#00ccff", cornerRadius: "500px", width: "30%" do
+            image current_user.image_url
+          end
+          vertical_box do
+            if current_user.registered?
+              text current_user.real_name, size: :lg, color: "#ffffff"
+              text current_user.role_name, color: "#959AA0", size: :sm
+              text @org.name, color: "#959AA0", size: :xs
+            else
+              text current_user.name, size: :lg, color: "#ffffff"
+              url_button "實名制認證", liff_path(path: richmenu_registration_path, liff_size: :tall), style: "primary", color: "#CE7B72", height: :sm
+            end
+            
+          end
+        end
+
+        text "今日防疫代辦事項", weight: :bold, align: :start, color: "#ffffff"
+        
+        separator color: "#ffffff"
+        vertical_box spacing: :lg do
+          baseline_box spacing: :md do
+            text "同仁實名制認證", align: :start, color: "#959AA0"
+            text @registered ? "✅" : "❌", align: :end
+          end
+
+          baseline_box spacing: :md do
+            text "個人足跡調查", align: :start, color: "#959AA0"
+            text @reported ? "✅" : "❌", align: :end
+          end
+
+          baseline_box spacing: :md do
+            text "自我健康監控", align: :start, color: "#959AA0"
+            text @need_tracking ? (@tracked ? "✅" : "❌") : "不需要" , align: :end, color: "#959AA0"
+          end
+        end
+        if !current_user.registered?
+          horizontal_box
+          horizontal_box
+          horizontal_box spacing: :md, cornerRadius: "10px", backgroundColor: "#F9F0D9", paddingAll: :md do
+            text "📢 請先實名制登記，讓公司確認您的身份喔", wrap: true, color: "#700808"
+          end
+        end
+      end
+
+      if current_user.registered?
+        footer layout: :vertical, spacing: :md, borderWidth: "light", backgroundColor: "#1F2024" do
+          url_button "自我健康監控", "https://www.kamigo.tw/", style: "primary", color: "#E97346" if  @need_tracking
+          url_button "每日足跡回報", liff_path(path: richmenu_daily_path, liff_size: :full), style: "primary", color: "#177F7C"
+          url_button "查看確診者足跡", "https://www.kamigo.tw/", style: "primary", color: "#8BADDB"
+          url_button "編輯個人資料", liff_path(path: richmenu_registration_path, liff_size: :tall)
+        end
+      end
+    end
+  end
+)%>

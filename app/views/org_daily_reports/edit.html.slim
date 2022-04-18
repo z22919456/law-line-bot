@@ -1,0 +1,9 @@
+.container.mx-auto.p-3
+  h2.font-medium.text-xl.text-center.mt-3 Hi, #{current_user&.name} 
+  .shadow-lg.rounded.mt-3.border.border-gray-100.px-4.py-3.mx-auto.bg-white class="max-w-[500px]"
+    h1.font-medium.text-lg.mb-3.text-center 編輯 #{Date.today.strftime("%m/%d")} 個人足跡調查
+    p.text-gray-700 請單位行政調查及通報是否有有同仁曾出沒過#{Date.today.strftime("%m/%d")}確診者足跡公共場所活動史，需自主健康管理者，若有請填寫下表。
+    hr.my-2
+    = form_for(@daily_report, url: user_org_daily_report_path(@daily_report), html: { method: :put, id: "daily_report" }) do |f|
+      = render partial: "form", locals:{ f: f }
+  

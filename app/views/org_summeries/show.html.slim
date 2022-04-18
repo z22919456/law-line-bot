@@ -1,0 +1,46 @@
+.container.mx-auto.p-3 class="max-w-[500px]"
+  h2.font-medium.text-xl.text-center.my-3 
+    = @org.name
+    = " "
+    | 今日回報人數
+
+  .shadow-md.m-4.p-4.rounded-lg.bg-white
+    .grid.grid-cols-2.gap-4.mb-1
+      .text-center
+        p.text-gray-600 專任人數
+        p.m-3.font-bold.text-2xl = @org_summery ? @org_summery.need_reports : "尚未填寫"
+      .text-center
+        p.text-gray-600 回報人數
+        p.m-3.font-bold.text-2xl = @org_summery ? @org_summery.reported : "尚未填寫"
+    = link_to "#{@org_summery.present? ? "編輯" : "新增今日人數"}", new_user_org_summery_path, class: "block text-center w-full py-2 my-2 text-md font-medium tracking-wide text-white transition-colors duration-200 transform bg-blue-700 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+
+  h2.font-medium.text-xl.text-center.my-3 
+    = @org.name
+    = " "
+    | 回報需自主健康管理者
+  .shadow-md.container.rounded-lg.overflow-hidden	
+    table.w-full.text-sm.text-left.text-gray-700
+      thead.text-xs.text-gray-800.bg-gray-200
+        tr
+          th.px-6.py-3 scope="col" 業務代碼
+          th.px-6.py-3 scope="col" 接觸時間
+          th.px-6.py-3 class="w-[120px]"
+            = link_to new_user_org_daily_report_path, class: "text-gray-500 hover:text-gray-800 pr-2" do
+              i.fas.fa-plus 
+              span.ml-1 新增一筆
+      tbody
+        - if @daily_reports.size.zero?
+          tr.bg-white.border-b
+            th.px-6.py-4.font-medium colspan="3"
+              p.text-gray-500.text-lg.text-center 今天尚未新增健康管理之同仁
+        - @daily_reports.each do |report|
+          tr.bg-white.border-b
+            th.px-6.py-4.font-medium
+              = report.eno
+            th.px-6.py-4.font-medium
+              = report.touch_date&.strftime('%m/%d')
+            th.px-6.py-4.font-medium
+              = link_to edit_user_org_daily_report_path(report), class: "text-green-300 hover:text-green-500 pr-2" do
+                i.fas.fa-pen
+              = button_to user_org_daily_report_path(report), method: :delete, class: "text-red-300 hover:text-red-500 pl-2 inline-block", form_class: 'inline' do
+                i.fas.fa-trash

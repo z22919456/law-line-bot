@@ -1,0 +1,9 @@
+<script>
+  if (window.liff) {
+    window.addEventListener("liff_ready", function() {
+      location.replace("<%= @path%>");
+    });
+  } else {
+    location.replace("<%=@path%>")
+  }
+</script>

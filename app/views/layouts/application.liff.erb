@@ -1,19 +1,2 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>LineBot</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <%= javascript_pack_tag 'App' %>
-    <script src="https://kit.fontawesome.com/04a34cccc6.js" crossorigin="anonymous"></script>
-  </head>
-
-  <body class="bg-slate-50">
-    <%= yield %>
-  </body>
-</html>
+<%= yield %>
+  

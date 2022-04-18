@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/TrestleAdmin/trestle-auth.git
+  revision: 7eb740bba13b3a01119aa5e4447f04d123628ac2
+  specs:
+    trestle-auth (0.4.3)
+      bcrypt (~> 3.1.7)
+      trestle (~> 0.9.0, >= 0.9.3)
+
+GIT
   remote: https://github.com/etrex/omniauth-line.git
   revision: 3a770110c6fee0027708d0abcd5b975e7e7b5c86
   specs:
@@ -137,6 +145,18 @@ GEM
     kamiliff (0.35.0)
       line_login (>= 0.1.0)
       rails (>= 5.0.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     line-bot-api (1.23.0)
     line_login (0.1.0)
       json
@@ -272,6 +292,13 @@ GEM
     thor (1.2.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
+    trestle (0.9.5)
+      activemodel (>= 4.2.0)
+      kaminari (>= 1.1.0)
+      railties (>= 4.2.0)
+      sprockets-rails (>= 2.0.0)
+    trestle-search (0.4.3)
+      trestle (~> 0.9.0, >= 0.9.3)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
@@ -328,6 +355,9 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   tailwindcss-rails (~> 2.0)
+  trestle
+  trestle-auth!
+  trestle-search
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 3.3.0)

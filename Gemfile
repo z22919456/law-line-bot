@@ -74,4 +74,9 @@ gem 'react-rails'
 
 gem 'slim'
 
-gem "tailwindcss-rails", "~> 2.0"
+gem 'tailwindcss-rails', '~> 2.0'
+
+# admin
+gem 'trestle'
+gem 'trestle-auth', github: 'TrestleAdmin/trestle-auth'
+gem 'trestle-search'

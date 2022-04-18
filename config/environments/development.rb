@@ -9,11 +9,14 @@ Rails.application.configure do
 
   config.hosts << '3453-36-226-9-7.ngrok.io'
 
+  config.web_console.whitelisted_ips = ['127.0.0.0/8', '114.44.227.118/24']
+
   # Do not eager load code on boot.
   config.eager_load = false
 
   # Show full error reports.
   config.consider_all_requests_local = true
+  config.i18n.fallbacks = true
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.

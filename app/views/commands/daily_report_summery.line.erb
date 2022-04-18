@@ -4,7 +4,7 @@
     bubble size: "giga" do
       # 單位名稱
       header type: "box", layout: "vertical" do
-        text "台北營業處", weight: 'bold', size: 'xxl', align: "center"
+        text "#{Date.today.strftime("%m/%d")}#{@org.name}", weight: 'bold', size: 'xxl', align: "center"
       end
       body layout: "vertical", spacing: "2px" do
         # 標題
@@ -22,7 +22,7 @@
             text "專任業務", size: 'lg', weight: 'bold'
           end
           horizontal_box backgroundColor: "#F9E4D6", paddingAll: "5px" do
-            text "51", size: 'lg', align: "center", weight: 'bold'
+            text @summery&.need_reports || "尚未填寫", size: 'lg', align: "center", weight: 'bold'
           end
         end
 
@@ -32,7 +32,7 @@
             text "行政人員", size: 'lg', weight: 'bold'
           end
           horizontal_box backgroundColor: "#F9E4D6", paddingAll: "5px" do
-            text "2", size: 'lg', align: "center", weight: 'bold'
+            text @summery&.reported || "尚未填寫", size: 'lg', align: "center", weight: 'bold'
           end
         end
 
