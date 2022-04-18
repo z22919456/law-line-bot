@@ -1,0 +1,23 @@
+<% if @footprint.nil?%>
+  <%= raw({
+    type: "text",
+    text: "今日的全國各縣市足跡尚未彙整完成喔，請留意即時訊息，完成後我們會第一時間通知您！"
+  }.to_json)%>
+<%else%>
+  <%= raw({
+    type: 'text',
+    text: "$ 防疫小組快訊息 $\n\n#{Date.today.strftime('%m/%d')} 🦶🏻全國各縣市足跡通報整理 \n#{@footprint.pdf_url}\n\n#{@footprint.note}",
+    emojis: [
+      {
+        index: 0,
+        productId: '5ac21a18040ab15980c9b43e',
+        emojiId: '025'
+      },
+      {
+        index: 10,
+        productId: '5ac21a18040ab15980c9b43e',
+        emojiId: '025'
+      }
+    ]
+  }.to_json) %>
+<%end%>

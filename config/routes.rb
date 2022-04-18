@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '目錄', to: 'home#menu'
   get '我該做什麼？', to: 'commands#menu'
   get '目前部門回報狀況', to: 'commands#daily_report_summery'
+  get '今日確診者足跡', to: 'commands#today_footprint'
 
   # richmenu
   get '/dispatch/daily', to: 'dispatch#daily', as: :richmenu_daily

@@ -15,19 +15,8 @@ Trestle.resource(:daily_reports) do
   # Customize the table columns shown on the index view.
   #
   table do
-    column :user do |daily_report|
-      link_to daily_report.user.real_name, edit_users_admin_path(daily_report.user) if daily_report.user.present?
-    end
-    column :organization do |daily_report|
-      if daily_report.organization
-        link_to daily_report.organization.name,
-                edit_organizations_admin_path(daily_report.organization)
-      end
-      if daily_report.user
-        link_to daily_report.user.organization.name,
-                edit_organizations_admin_path(daily_report.user.organization)
-      end
-    end
+    column :user, link: true
+    column :organization, link: true
     column :answered do |daily_report|
       I18n.t(daily_report.answered, scope: %i[activerecord attributes daily_report answers])
     end

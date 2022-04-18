@@ -1,6 +1,8 @@
 class Footprint < ApplicationRecord
   before_commit :send_line_notification
 
+  scope :today, -> { where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day).first }
+
   def send_line_notification
     return unless created_at.today?
 
