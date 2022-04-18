@@ -3,11 +3,11 @@ Trestle.resource(:healthy_trackings) do
     item :healthy_trackings, icon: 'fas fa-virus'
   end
 
-  # Organization.where(id: HealthyTracking.joins(:user).pluck(:organization_id)).each do |organization|
-  #   scope :"#{organization.name}", lambda {
-  #                                    HealthyTracking.joins(:user).where(users: { organization_id: organization.id })
-  #                                  }
-  # end
+  Organization.where(id: HealthyTracking.joins(:user).pluck(:organization_id)).each do |organization|
+    scope :"#{organization.name}", lambda {
+                                     HealthyTracking.joins(:user).where(users: { organization_id: organization.id })
+                                   }
+  end
 
   # Customize the table columns shown on the index view.
   #
