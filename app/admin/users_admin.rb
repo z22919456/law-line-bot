@@ -20,7 +20,7 @@ Trestle.resource(:users) do
   #
   table do
     column :image_url do |user|
-      image_tag(user.image_url, style: 'height: 50px') if user.image_url
+      image_tag(user.image_url, style: 'height: 50px; border-radius: 50px;') if user.image_url
     end
     column :name
     column :real_name
