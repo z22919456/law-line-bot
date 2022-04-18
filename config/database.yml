@@ -52,3 +52,8 @@ test:
   username: brenden
   password:
   timeout: 5000
+production:
+  adapter: postgresql
+  poll: 5
+  timeout: 5000
+  database: law_line_bot_production
