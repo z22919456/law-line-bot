@@ -1,6 +1,6 @@
 Trestle.resource(:users) do
   menu do
-    item :users, icon: 'fa fa-user'
+    item '公司同仁', icon: 'fa fa-user'
   end
 
   search do |query|
@@ -26,7 +26,9 @@ Trestle.resource(:users) do
     column :real_name
     column :eno
     column :organization
-    column :role
+    column :role do |user|
+      I18n.t(user.role, scope: %i[activerecord attributes user roles])
+    end
     column :need_track do |user|
       user.need_tracking? ? '是' : '否'
     end
@@ -39,8 +41,8 @@ Trestle.resource(:users) do
   form do |user|
     tab :user do
       text_field :name
-      select :organization_id, Organization.all, { label: 'organization' }
-      select :role, User.roles.keys, { label: 'role' }
+      collection_select :organization_id, Organization.all, :id, :name
+      select :role, User.roles.keys.map { |k| [I18n.t(k, scope: %i[activerecord attributes user roles]), k] }
       row do
         col { datetime_field :updated_at }
         col { datetime_field :created_at }

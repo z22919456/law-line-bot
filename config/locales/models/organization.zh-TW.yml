@@ -1,0 +1,9 @@
+zh-TW:
+  activerecord:
+    models:
+      organization: 部門/營業處
+    attributes:
+      organization:
+        name: 部門名稱
+        is_sales: 營業單位
+        users: 部門同仁

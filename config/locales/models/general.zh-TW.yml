@@ -1,0 +1,5 @@
+zh-TW:
+  attributes:
+    id: ID
+    created_at: 建立於
+    updated_at: 更新於

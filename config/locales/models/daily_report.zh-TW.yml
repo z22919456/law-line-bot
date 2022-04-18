@@ -1,0 +1,19 @@
+zh-TW:
+  activerecord:
+    models:
+      daily_report: 每日足跡回報
+    attributes:
+      daily_report:
+        user: 同仁
+        answered: 回答
+        touch_date: 接觸日期/需自主健康管理開始日期
+        touch_location: 接觸地點/需自主健康管理原因
+        organization: 部門/營業處
+        write: 填寫人
+        need_tracking_till: 自我健康追蹤至
+        answers:
+          normal: 否
+          need_isolation: 是, 需自我健康監測者
+          touched_diagnosed: 是, 被政府「通知」需自主健康管理者
+          need_report: 否, 但需自我健康監測者
+          be_notified_need_report: 否, 但被「通知」需自主健康管理者

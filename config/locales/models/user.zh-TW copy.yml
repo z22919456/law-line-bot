@@ -1,0 +1,20 @@
+zh-TW:
+  activerecord:
+    models:
+      user: 公司同仁
+    attributes:
+      user:
+        email: email
+        name: Line 名稱 
+        eno: 業代
+        line_id: Line ID
+        image_url: Line 大頭貼
+        organization: 部門/營業處
+        real_name: 姓名
+        role: 角色
+        need_track: 需要健康追蹤
+        roles:
+          sales: 業務同仁
+          staff: 一般同仁
+          manager: 部門負責人
+          sales_supervisor: 單位行政

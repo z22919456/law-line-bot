@@ -1,6 +1,7 @@
 Trestle.resource(:healthy_trackings) do
+  I18n.default_locale = :"zh-TW"
   menu do
-    item :healthy_trackings, icon: 'fas fa-virus'
+    item '每日健康追蹤', icon: 'fas fa-virus'
   end
 
   Organization.where(id: HealthyTracking.joins(:user).pluck(:organization_id)).each do |organization|

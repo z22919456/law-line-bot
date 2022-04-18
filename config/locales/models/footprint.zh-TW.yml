@@ -1,0 +1,10 @@
+zh-TW:
+  activerecord:
+    models:
+      footprint: 
+        one: 每日足跡回報
+        other: 每日足跡回報
+    attributes:
+      footprint:
+        pdf_url: PDF 網址
+        note: 附加留言

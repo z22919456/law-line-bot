@@ -1,6 +1,6 @@
 Trestle.resource(:footprint) do
   menu do
-    item :footprint, icon: 'fas fa-paw'
+    item '全國確診足跡整理', icon: 'fas fa-paw'
   end
 
   # Customize the table columns shown on the index view.
@@ -16,7 +16,7 @@ Trestle.resource(:footprint) do
 
   # Customize the form fields shown on the new/edit views.
   #
-  form do |_healthy_tracking|
+  form do
     text_field :pdf_url
     text_area :note
   end

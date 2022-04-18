@@ -1,33 +1,94 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
-
 zh-TW:
-  hello: "Hello world"
+  trestle:
+    title: "Trestle Admin"
+    footer: "由 Trestle 提供"
+    version: "版本"
+
+    helpers:
+      page_entries_info:
+        one_page:
+          display_entries:
+            zero: "沒找到%{entry_name}"
+            one: " <strong>1</strong> 筆 %{entry_name} "
+            other: "<strong>全部共 %{count}</strong> 筆 %{entry_name} 紀錄"
+
+        more_pages:
+          display_entries: "%{entry_name} <strong>%{first}&nbsp;-&nbsp;%{last}</strong>筆，共 <b>%{total} 筆</b>"
+
+    onboarding:
+      welcome: "歡迎使用 Trestle"
+      no_admins: "要開始使用，請在 <code>app/admin</code> 里建立管理資源。"
+      no_template: "要客製化樣板，请建立 <code>%{path}</code>。"
+      no_form: "請新增一個表單或者建立一個 <code>_form.html</code>。"
+
+    ui:
+      toggle_navigation: "顯示/隐藏麵包屑"
+      toggle_sidebar: "顯示/隐藏側欄"
+
+    dialog:
+      error: 系統錯誤
+
+    confirmation:
+      title: 確定要刪除？
+      delete: 刪除
+      cancel: 不
+
+  admin:
+    titles:
+      index: "%{pluralized_model_name} 列表"
+      new: "建立 %{model_name}"
+      edit: "編輯 %{model_name}"
+
+    buttons:
+      new: "建立 %{model_name}"
+      save: "儲存 %{model_name}"
+      delete: "刪除 %{model_name}"
+      ok: "確認"
+
+    breadcrumbs:
+      home: "首頁"
+
+    flash:
+      create:
+        success:
+          title: "成功！"
+          message: "%{lowercase_model_name}建立成功。"
+
+        failure:
+          title: "警告!"
+          message: "請修正以下錯誤。"
+
+      update:
+        success:
+          title: "成功！"
+          message: "%{lowercase_model_name}更新成功。"
+
+        failure:
+          title: "警告!"
+          message: "請修正以下錯誤。"
+
+      destroy:
+        success:
+          title: "成功！"
+          message: "%{lowercase_model_name}刪除成功"
+
+        failure:
+          title: "警告!"
+          message: "不可刪除 %{lowercase_model_name}。"
+
+    table:
+      headers:
+        id: "ID"
+
+    form:
+      select:
+        prompt: "- 選擇%{attribute_name} -"
+
+    format:
+      blank: "無"
+
+    datepicker:
+      formats:
+        date: "Y/m/d"
+        datetime: "Y/m/d H:i"
+        time: "H:i"

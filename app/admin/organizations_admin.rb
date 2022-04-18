@@ -1,6 +1,6 @@
 Trestle.resource(:organizations) do
   menu do
-    item :organizations, icon: 'fas fa-building'
+    item '部門/營業處', icon: 'fas fa-building'
   end
 
   search do |query|

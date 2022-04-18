@@ -1,8 +1,6 @@
 Trestle.resource(:admins, model: Admin, scope: Auth) do
   menu do
-    group :configuration, priority: :last do
-      item :admins, icon: 'fas fa-users'
-    end
+    item '後台管理員', icon: 'fas fa-users'
   end
 
   table do

@@ -1,6 +1,6 @@
 Trestle.resource(:daily_reports) do
   menu do
-    item :daily_reports, icon: 'fas fa-list-alt'
+    item '每日足跡回報', icon: 'fas fa-list-alt'
   end
 
   # scope :today, -> { DailyReport.where(created_at: Date.today.beginning_of_day..Date.today.end_of_day) }
@@ -28,6 +28,9 @@ Trestle.resource(:daily_reports) do
                 edit_organizations_admin_path(daily_report.user.organization)
       end
     end
+    column :answered do |daily_report|
+      I18n.t(daily_report.answered, scope: %i[activerecord attributes daily_report answers])
+    end
     column :touch_date
     column :touch_location
     column :write do |daily_report|
@@ -40,8 +43,8 @@ Trestle.resource(:daily_reports) do
 
   # Customize the form fields shown on the new/edit views.
   #
-  form do |_daily_report|
-    static_field :answered
+  form do |daily_report|
+    static_field :answered, I18n.t(daily_report.answered, scope: %i[activerecord attributes daily_report answers])
     static_field :touch_date
     static_field :touch_location
     date_field :need_tracking_till

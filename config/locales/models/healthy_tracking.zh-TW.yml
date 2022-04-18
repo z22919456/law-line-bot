@@ -1,0 +1,13 @@
+zh-TW:
+  activerecord:
+    models:
+      healthy_tracking: 自主健康管理
+    attributes:
+      healthy_tracking:
+        body_temperature: 體溫
+        foot_step: 今日足跡
+        health_feels_today: 今日身體狀況
+        health_feels_weeks: 這兩週身體狀況
+        note: Note
+        user: 同仁
+        organization: 部門/營業處
