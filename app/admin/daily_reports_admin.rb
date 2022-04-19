@@ -33,10 +33,14 @@ Trestle.resource(:daily_reports) do
   # Customize the form fields shown on the new/edit views.
   #
   form do |daily_report|
-    static_field :answered, I18n.t(daily_report.answered, scope: %i[activerecord attributes daily_report answers])
-    static_field :touch_date
-    static_field :touch_location
-    date_field :need_tracking_till
+    row do
+      col do
+        static_field :answered, I18n.t(daily_report.answered, scope: %i[activerecord attributes daily_report answers])
+      end
+      col { static_field :touch_date }
+      col { static_field :touch_location }
+      col { date_field :need_tracking_till }
+    end
   end
 
   # By default, all parameters passed to the update and create actions will be

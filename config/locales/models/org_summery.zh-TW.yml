@@ -1,0 +1,9 @@
+zh-TW:
+  activerecord:
+    models:
+      org_summery: 部門/營業處每日回覆人數
+    attributes:
+      org_summery:
+        need_reports: 部門/營業處須回復人數
+        reported: 實際回覆人數
+        organization: 部門/營業處

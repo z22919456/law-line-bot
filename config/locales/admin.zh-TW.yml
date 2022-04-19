@@ -9,16 +9,16 @@ zh-TW:
         one_page:
           display_entries:
             zero: "沒找到%{entry_name}"
-            one: " <strong>1</strong> 筆 %{entry_name} "
-            other: "<strong>全部共 %{count}</strong> 筆 %{entry_name} 紀錄"
+            one: " %{entry_name} - <strong>1</strong> 筆紀錄"
+            other: "%{entry_name} - 共 <strong> %{count}</strong> 筆紀錄"
 
         more_pages:
-          display_entries: "%{entry_name} <strong>%{first}&nbsp;-&nbsp;%{last}</strong>筆，共 <b>%{total} 筆</b>"
+          display_entries: "%{entry_name} - 顯示 <strong>%{first}&nbsp;-&nbsp;%{last}</strong> 筆，共 <b>%{total}</b> 筆"
 
     onboarding:
       welcome: "歡迎使用 Trestle"
-      no_admins: "要開始使用，請在 <code>app/admin</code> 里建立管理資源。"
-      no_template: "要客製化樣板，请建立 <code>%{path}</code>。"
+      no_admins: "要開始使用，請在 <code>app/admin</code> 建立管理資源。"
+      no_template: "要客製化樣板，請建立 <code>%{path}</code>。"
       no_form: "請新增一個表單或者建立一個 <code>_form.html</code>。"
 
     ui:

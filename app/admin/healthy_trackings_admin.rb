@@ -30,10 +30,14 @@ Trestle.resource(:healthy_trackings) do
   # Customize the form fields shown on the new/edit views.
   #
   form do |_healthy_tracking|
-    static_field :body_temperature
-    static_field :foot_step
-    static_field :health_feels_today
-    static_field :health_feels_weeks
+    row do
+      col { static_field :body_temperature }
+      col { static_field :foot_step }
+    end
+    row do
+      col { static_field :health_feels_today }
+      col { static_field :health_feels_weeks }
+    end
   end
 
   # By default, all parameters passed to the update and create actions will be
